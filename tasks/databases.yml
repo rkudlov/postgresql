@@ -5,6 +5,11 @@
     name: "{{ postgresql_service_name }}"
     state: started
 
+- name: hold until Postgresql is up and running
+  wait_for:
+    host: 127.0.0.1
+    port: 5432
+
 - name: PostgreSQL | Make sure the PostgreSQL databases are present
   postgresql_db:
     name: "{{item.name}}"
